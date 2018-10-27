@@ -1,76 +1,21 @@
 <html>
-    <head>
-        <title>Pokemon Team</title>    
-    <link rel = "stylesheet" type = "text/css" href = "css/viewPokemon.css">    
-    <link rel = "stylesheet" type = "text/css" href = "https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css"><link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
-    <script src = "https://storage.googleapis.com/code.getmdl.io/1.0.6/material.js"></script>
-    <script src = "js/viewPokemon.js"></script>
-    </head>
-    <body onload = "init()">  
-        <div id = "screen_dim"></div>      
-        <div id = "black-back" onclick = "hidePokemonInfo()" class = "black-back"></div>
-        <div id = "pokemon-info" class = "popup-box-back mdl-grid" style = "display:none;margin-left:9%;margin-top:15%;padding:0px;">                
-            <div id = "pokemon-color" class = "mdl-grid mdl-cell--12-col pokemon-color" style = "padding:0px"></div>
-            <div id = "pokemon-description" class = "mdl-grid mdl-cell--12-col pokemon-description" style = "margin-top:5%;padding:0px;">
-                <div class = "mdl-cell--6-col" style = "width:50%;text-align:center;">
-                    <img id = "pokemon_image" src = "img/bulbasaur.png" alt = "Pokemon Image">
-                    <br/>
-                    <div class="mdl-cell--12-col progress" style = "width:80%;">
-                        <div class="progress-bar-green" style="width:70%"></div>
-                    </div>
-                </div>                
-
-                <div class = "mdl-grid mdl-cell--6-col" style = "width:50%;padding:0px;">
-                    <div id = "nickname" class = "mdl-cell--12-col" style = "width:100%;font-size:17px;color:#424242;">Mendak</div>                    
-                    <div id = "name" class = "mdl-cell--12-col" style = "width:100%">Bulbasaur</div>
-                    <div id = "attack" class = "mdl-cell--6-col" style = "width:40%"><img src = "img/attack.png" style = "height:20px;width:20px"> 12</div>
-                    <div id = "defense" class = "mdl-cell--6-col" style = "width:40%"><img src = "img/defense.png" style = "height:20px;width:20px"> 14</div>
-                    <div id = "SPattack" class = "mdl-cell--6-col" style = "width:40%"><img src = "img/attack.png" style = "height:20px;width:20px"> 19</div>
-                    <div id = "SPdefense" class = "mdl-cell--6-col" style = "width:40%"><img src = "img/defense.png" style = "height:20px;width:20px"> 14</div>
-                    <div id = "hp" class = "mdl-cell--6-col" style = "width:40%"><img src = "img/hp.png" style = "height:20px;width:20px"> 32</div>
-                    <div id = "speed" class = "mdl-cell--6-col" style = "width:40%"><img src = "img/attack.png" style = "height:20px;width:20px"> 15</div>                    
-                </div>
-
-                <div class = "mdl-grid mdl-cell--12-col" style = "width:100%;margin-top:3%;padding:0px;">
-                    <div class = "mdl-cell--12-col">Moves:</div>
-                    <div id = "move_1" class = "mdl-cell--6-col move" style = "width:50%;">Moves:</div>
-                    <div id = "move_2" class = "mdl-cell--6-col move" style = "width:50%;">Moves:</div>
-                    <div id = "move_3" class = "mdl-cell--6-col move" style = "width:50%;">Moves:</div>
-                    <div id = "move_4" class = "mdl-cell--6-col move" style = "width:50%;">Moves:</div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class = "mdl-grid mdl-cell--12-col basic-bottom-border height-10 width-100">
-            <!--<div class = "mdl-cell--1-col basic-card header"><i class = "material-icons">arrow_left</i></div>-->
-            <div class = "mdl-cell--12-col basic-card header">My Pokemon Team</div>
-            <div class = "mdl-cell--12-col basic-card"><span style = "font-size:16px;color:#bdbdbd;">Tap to view any pokemon</span></div>            
-            <!--<div class = "mdl-cell--4-col basic-card height-50" style = "padding-top:10;text-align:right;"><input type = "text" placeholder = "Search" class = "search-box"></div>-->
-        </div>                    
-        <div class = "mdl-grid mdl-cell--12-col" style = "width:80%;text-align:right;padding:0px;">            
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-                  <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6">
-                    <i class="material-icons">search</i>
-                </label>
-                <div class="mdl-textfield__expandable-holder" style = "width:100%;">
-                    <input class="mdl-textfield__input" type="text" id="sample6">
-                    <label class="mdl-textfield__label" for="sample-expandable">Expandable Input</label>
-                </div>
-            </div>
-        </div>
-
-        <div id = "pokemonDisplay" class = "mdl-grid mdl-cell--12-col" style = "text-align:left;margin-top:-2%;">            
-<!--
-            <div class = "mdl-grid mdl-cell--2-col pokemon-card" onclick="getSpriteLink(this)" style = "max-width: 90px;">         
-                <div class = "mdl-cell--12-col" style = "width:100%;height:75%;text-align:center;"><img src = "img/bulbasaur.png" alt="PokemonSprite" style = "height:80px;width:80px;"></div>                             
-                <div class = "mdl-cell--12-col" style = "width:100%;text-align:center;"><span>Pokemon</span></div>
-                <div class="mdl-cell--12-col progress" style = "width:100%;">
-                    <div class="progress-bar-green" style="width:70%"></div>
-                </div>
-            </div>            
--->                     
-        </div>             
-    </body>
-</html>
+<head>
+	<link rel = "stylesheet" type = "text/css" href = "https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
+	<link rel = "stylesheet" href = "css/index.css">
+	<link href="https://fonts.googleapis.com/css?family=Poiret+One|Roboto" rel="stylesheet">
+	<script src = "https://storage.googleapis.com/code.getmdl.io/1.0.6/material.js"></script> 	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src = "js/index.js"></script>
+</head>
+<body onload = "init()" onmousemove="dragging(event)" onmousedown="dragStart(event)" onmouseup="dragEnd(event)">
+	<div class = "mdl-grid" style = "padding:0px;">
+		<div class = "mdl-cell--10-col board">
+			<canvas id = "canvas" class = "canvas" onmouseenter="inCanvas()" onmouseleave="outCanvas()"></canvas>	
+		</div>
+		<div class = "mdl-cell--2-col tools" style = "background-color:red;">
+			<button id = "clear" onclick = "clearButton()">clear</button>
+			<button id = "draw" onclick = "drawButton()">draw</button>
+		</div>
+	</div>
+</body>
+</html>	
