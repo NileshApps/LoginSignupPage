@@ -45,8 +45,8 @@ function draw_pixel(event){
 	else{			
 			event.preventDefault();						
 			var touch = event.touches[0];						
-			var x = disc[i].LineX;			
-			var y = disc[i].LineY;									
+			var x = disc[i].pageX;			
+			var y = disc[i].pageY;									
 		}
 	//cvs = document.getElementById("canvas");		
 	//ctx = cvs.getContext("2d");
