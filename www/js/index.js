@@ -39,15 +39,17 @@ function dragging(event){
 }
 function draw_pixel(event){
 	var x,y;
-	if(event.type == "mousemove" || event.type == "mousedown" || event.type == "mouseup"){			
+	if(event.type == "mousemove" || event.type == "mousedown" || event.type == "mouseup"){					
 			x = event.pageX;
 			y = event.pageY;						
+			document.getElementById("log").innerHTML = 'mouse : '+x.toString()+','+y.toString();
 	}
-	else{			
+	else{						
 			event.preventDefault();						
 			var touch = event.touches[0];						
 			x = touch.pageX;			
 			y = touch.pageY;									
+			document.getElementById("log").innerHTML = 'touch : '+x.toString()+','+y.toString();
 		}
 	//cvs = document.getElementById("canvas");		
 	//ctx = cvs.getContext("2d");
