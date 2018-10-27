@@ -16,9 +16,9 @@ function init(){
 	console.log(cvs.offsetParent);		
 	var point = {x:-1,y:-1};
 	posVector.push(point);
-	cvs.addEventListener('touchmove', dragging, false);
-	cvs.addEventListener('touchstart', dragStart, false);
-	cvs.addEventListener('touchend', dragEnd, false);   
+	//cvs.addEventListener('touchmove', dragging, false);
+	//cvs.addEventListener('touchstart', dragStart, false);
+	//cvs.addEventListener('touchend', dragEnd, false);   
 	//cvsDim = {top:rect.top,left:rect.left,bottom:rect.bottom,right:rect.right};
 	//cvsDim.top = rect.top;
 	//cvsDim.left = rect.left;
