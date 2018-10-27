@@ -16,6 +16,9 @@ function init(){
 	console.log(cvs.offsetParent);		
 	var point = {x:-1,y:-1};
 	posVector.push(point);
+	cvs.addEventListener('touchmove', dragging, false);
+	cvs.addEventListener('touchstart', dragStart, false);
+	cvs.addEventListener('touchend', dragEnd, false);   
 	//cvsDim = {top:rect.top,left:rect.left,bottom:rect.bottom,right:rect.right};
 	//cvsDim.top = rect.top;
 	//cvsDim.left = rect.left;
@@ -26,19 +29,29 @@ function init(){
 function dragStart(event){
 	isDrawing = true;
 	if(isDrawing && insideCanvas)
-		draw_pixel();			
+		draw_pixel(event);			
 }
 function dragging(event){	
 	if(isDrawing && insideCanvas){						
-		draw_pixel();		
+		draw_pixel(event);		
 		//console.log("X: ",x," Y: ",y);
 	}
 }
-function draw_pixel(){
+function draw_pixel(event){
+	if(event.type == "mousemove" || event.type == "mousedown" || event.type == "mouseup"){			
+			var x = event.pageX;
+			var y = event.pageY;						
+	}
+	else{			
+			event.preventDefault();						
+			var touch = event.touches[0];						
+			var x = disc[i].LineX;			
+			var y = disc[i].LineY;									
+		}
 	//cvs = document.getElementById("canvas");		
 	//ctx = cvs.getContext("2d");
-	var x = event.pageX-cvs.offsetLeft;
-	var y = event.pageY-cvs.offsetTop;			
+	//var x = event.pageX-cvs.offsetLeft;
+	//var y = event.pageY-cvs.offsetTop;			
 	if(prevX == -1 || prevY == -1){
 		ctx.beginPath();
 		ctx.moveTo(x,y);				
@@ -51,7 +64,7 @@ function draw_pixel(){
 	posVector.push(point);	
 	prevX = x;prevY = y;
 }
-function dragEnd(event){
+function dragEnd(event){	
 	isDrawing = false;
 	prevX = prevY = -1;
 	var point = {x:-1,y:-1};
