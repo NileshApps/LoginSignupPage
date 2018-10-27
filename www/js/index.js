@@ -38,15 +38,16 @@ function dragging(event){
 	}
 }
 function draw_pixel(event){
+	var x,y;
 	if(event.type == "mousemove" || event.type == "mousedown" || event.type == "mouseup"){			
-			var x = event.pageX;
-			var y = event.pageY;						
+			x = event.pageX;
+			y = event.pageY;						
 	}
 	else{			
 			event.preventDefault();						
 			var touch = event.touches[0];						
-			var x = disc[i].pageX;			
-			var y = disc[i].pageY;									
+			x = touch.pageX;			
+			y = touch.pageY;									
 		}
 	//cvs = document.getElementById("canvas");		
 	//ctx = cvs.getContext("2d");
