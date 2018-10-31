@@ -82,6 +82,7 @@ function outCanvas(){
 function clearButton(){	
 	clearCanvas();	
 	send_canvas(make_pos_vector_data(posVector));
+	document.getElementById("log").innerHTML = 'clear';
 	posVector = [];
 }
 function make_pos_vector_data(posVector){
@@ -92,7 +93,8 @@ function make_pos_vector_data(posVector){
 	return packet;
 }
 function drawButton(){		
-	get_canvas();	 	
+	document.getElementById("log").innerHTML = 'draw';
+	get_canvas();		 
 }
 function clearCanvas(){
 	ctx.clearRect(0, 0, cvs.width, cvs.height);
