@@ -104,7 +104,7 @@ function make_pos_vector_data(posVector){
 }
 function drawButton(){		
 	document.getElementById("log").innerHTML = 'draw';
-	get_canvas();	 	
+	get_canvas(true);	 	
 }
 function clearCanvas(){
 	ctx.clearRect(0, 0, cvs.width, cvs.height);
@@ -205,6 +205,9 @@ function send_canvas_data(){
             }
         })
  }
+ function get_canvas2(){
+ 	get_canvas(false);
+ }
  function get_canvas(ForceUpdate){ 	
  	//var formdata = serialize({x:10,y:20});
  	//var formdata = {x:10,y:20};
@@ -236,5 +239,5 @@ function send_canvas_data(){
  	}
  else{
  	console.log("b");
- 	let get_canvas_interval = setInterval(get_canvas,1000);
+ 	let get_canvas_interval = setInterval(get_canvas2,1000);
  }
