@@ -28,14 +28,15 @@ function init(){
 }
 function dragStart(event){
 	isDrawing = true;
-	if(isDrawing && insideCanvas)
+	if(isDrawing)
 		draw_pixel(event);			
 }
 function dragging(event){	
-	if(isDrawing && insideCanvas){						
+//	if(isDrawing && insideCanvas){		
+	isDrawing = true;				
 		draw_pixel(event);		
 		//console.log("X: ",x," Y: ",y);
-	}
+//	}
 }
 function draw_pixel(event){
 	var x,y;
