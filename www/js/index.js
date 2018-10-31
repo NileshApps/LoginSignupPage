@@ -6,7 +6,10 @@ var cvs;
 var ctx;	
 var prevX = -1,prevY = -1;
 var posVector = [];
-function init(){		
+var mode;
+function init(){	
+	mode = localStorage.mode;		
+	console.log("Mode: ",mode);
 	document.getElementById("log2").innerHTML = mode;
 	cvs = document.getElementById("canvas");	
 	ctx = cvs.getContext("2d");	
@@ -14,9 +17,10 @@ function init(){
 	cvsWidth = cvs.width = cvs.offsetWidth;	 			
 	console.log("width:",cvsWidth," height:",cvsHeight);
 	console.log("X: ",cvs.offsetLeft," Y: ",cvs.offsetTop);	
-	console.log(cvs.offsetParent);		
+	console.log(cvs.offsetParent);			
 	var point = {x:-1,y:-1};
 	posVector.push(point);
+	//get_canvas();
 	//cvs.addEventListener('touchmove', dragging, false);
 	//cvs.addEventListener('touchstart', dragStart, false);
 	//cvs.addEventListener('touchend', dragEnd, false);   
@@ -221,7 +225,7 @@ function send_canvas_data(){
  	prevX = -1;prevY = -1;
  	window.location="index.html";
  }
- if (mode == "draw"){
+ if (localStorage.mode == "draw"){
  	console.log("a");
  	let send_canvas_interval = setInterval(send_canvas_data,1000);
  	}

@@ -4,7 +4,7 @@
 	<link rel = "stylesheet" href = "css/dash.css">
 	<!--<link href="https://fonts.googleapis.com/css?family=Poiret+One|Roboto" rel="stylesheet">-->
 	<script src = "https://storage.googleapis.com/code.getmdl.io/1.0.6/material.js"></script>
-	<!--<script src = "js/dash.js"></script>-->
+	<script src = "js/dash.js"></script>
 </head>
 <body>
 	<div class = "mdl-grid" style = "padding:0px;width:100%;">
@@ -12,10 +12,10 @@
 		<div class = "mdl-cell--12-col back">
 			<form action = "dash.php" style = "width:100%;height:100%;">
 				<div class = "mdl-cell--12-col button-d" style = "width:100%;">					  						
-					<button id = "draw" name = "draw" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Draw</button>
+					<button id = "draw" onclick = "setLocal('draw')" name = "draw" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Draw</button>
 				</div>
 				<div class = "mdl-cell--12-col button-d" style = "width:100%">					  									
-					<button id = "guess" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Guess</button>
+					<button id = "guess" onclick = "setLocal('guess')" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Guess</button>
 				</div>
 			</form>
 		</div>
