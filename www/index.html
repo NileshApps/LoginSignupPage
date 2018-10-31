@@ -1,21 +1,23 @@
 <html>
 <head>
-	<!--<link rel = "stylesheet" type = "text/css" href = "https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">-->
-	<link rel = "stylesheet" href = "css/index.css">
+	<link rel = "stylesheet" type = "text/css" href = "https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
+	<link rel = "stylesheet" href = "css/dash.css">
 	<!--<link href="https://fonts.googleapis.com/css?family=Poiret+One|Roboto" rel="stylesheet">-->
-	<!--<script src = "https://storage.googleapis.com/code.getmdl.io/1.0.6/material.js"></script>-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src = "js/index.js"></script>
+	<script src = "https://storage.googleapis.com/code.getmdl.io/1.0.6/material.js"></script>
+	<script src = "js/dash.js"></script>
 </head>
-<body onload = "init()">
-	<div class = "grid" style = "padding:0px;">
-		<div class = "board">
-			<canvas id = "canvas" class = "canvas" onmouseenter="inCanvas()" onmouseleave="outCanvas()" ontouchmove="dragging(event)" ontouchstart="dragStart(event)" ontouchend="dragEnd(event)" onmousemove="dragging(event)"onmousedown="dragStart(event)" onmouseup="dragEnd(event)"></canvas>	
-		</div>
-		<div class = "tools">
-			<button id = "clear" onclick = "clearButton()">clear</button>
-			<button id = "draw" onclick = "drawButton()">draw</button>
-			<div id="log" style = "color:white;"></div>
+<body>
+	<div class = "mdl-grid" style = "padding:0px;width:100%;">
+		<div class = "mdl-cell--12-col banner">Pictionary</div>
+		<div class = "mdl-cell--12-col back">
+			<form action = "dash.php" style = "width:100%;height:100%;">
+				<div class = "mdl-cell--12-col button-d" style = "width:100%;">					  						
+					<button id = "draw" name = "draw" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Draw</button>
+				</div>
+				<div class = "mdl-cell--12-col button-d" style = "width:100%">					  									
+					<button id = "guess" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Guess</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </body>

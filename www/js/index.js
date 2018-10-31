@@ -6,7 +6,7 @@ var cvs;
 var ctx;	
 var prevX = -1,prevY = -1;
 var posVector = [];
-function init(){	
+function init(){		
 	cvs = document.getElementById("canvas");	
 	ctx = cvs.getContext("2d");	
 	cvsHeight = cvs.height = canvas.offsetHeight;
@@ -32,24 +32,23 @@ function dragStart(event){
 		draw_pixel(event);			
 }
 function dragging(event){	
-//	if(isDrawing && insideCanvas){		
-	isDrawing = true;				
+	//if(isDrawing && insideCanvas){						
+		isDrawing = true;
 		draw_pixel(event);		
 		//console.log("X: ",x," Y: ",y);
 //	}
 }
-function draw_pixel(event){
-	var x,y;
-	if(event.type == "mousemove" || event.type == "mousedown" || event.type == "mouseup"){					
-			x = event.pageX;
-			y = event.pageY;						
+function draw_pixel(event){		
+	if(event.type == "mousemove" || event.type == "mousedown" || event.type == "mouseup"){								
+			var x = event.pageX-cvs.offsetLeft;
+			var y = event.pageY-cvs.offsetTop;									
 			document.getElementById("log").innerHTML = 'mouse : '+x.toString()+','+y.toString();
 	}
-	else{						
+	else{								
 			event.preventDefault();						
 			var touch = event.touches[0];						
-			x = touch.pageX;			
-			y = touch.pageY;									
+			var x = touch.pageX-cvs.offsetLeft;			
+			var y = touch.pageY-cvs.offsetTop;												
 			document.getElementById("log").innerHTML = 'touch : '+x.toString()+','+y.toString();
 		}
 	//cvs = document.getElementById("canvas");		
@@ -95,7 +94,7 @@ function make_pos_vector_data(posVector){
 }
 function drawButton(){		
 	document.getElementById("log").innerHTML = 'draw';
-	get_canvas();		 
+	get_canvas();	 	
 }
 function clearCanvas(){
 	ctx.clearRect(0, 0, cvs.width, cvs.height);
@@ -208,5 +207,12 @@ function send_canvas_data(){
             }
         })  	      
  }
-
- let game = setInterval(send_canvas_data,2000);
+ function go_back(){
+ 	window.location="index.html";
+ }
+ if (mode == "draw"){
+ 	let send_canvas_interval = setInterval(send_canvas_data,2000);
+ 	}
+ else{
+ 	let get_canvas_interval = setInterval(get_canvas,2000);
+ }
