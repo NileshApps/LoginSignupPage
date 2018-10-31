@@ -20,7 +20,7 @@ function init(){
 	console.log(cvs.offsetParent);			
 	var point = {x:-1,y:-1};
 	posVector.push(point);
-	//get_canvas();
+	get_canvas(true);
 	//cvs.addEventListener('touchmove', dragging, false);
 	//cvs.addEventListener('touchstart', dragStart, false);
 	//cvs.addEventListener('touchend', dragEnd, false);   
@@ -109,33 +109,36 @@ function drawButton(){
 function clearCanvas(){
 	ctx.clearRect(0, 0, cvs.width, cvs.height);
 }
-function draw_canvas(Mdata){
-	length_data = parseInt(Mdata['length']);	
-	data = Mdata['data'];
-	clearCanvas();
-	posVector = [];	
-	var point = {x:-1,y:-1}
-	posVector.push(point);
-	for(i=1;i<length_data;++i){
-		x = parseInt(data[String(i)]['x']);
-		y = parseInt(data[String(i)]['y']);
-		prevx = parseInt(data[String(i-1)]['x']);
-		prevy = parseInt(data[String(i-1)]['y']);		
-		if(x!=-1 && y!=-1){
-			if(prevx == -1 || prevy == -1){
-				ctx.beginPath();
-				ctx.moveTo(x,y);				
-			}
-			else{		
-				ctx.lineTo(x,y);
-				ctx.stroke();	
-			}	
-		}
-		else
-			ctx.beginPath();
-		var point = {x:x,y:y}
+function draw_canvas(Mdata,ForceUpdate){
+	length_data = parseInt(Mdata['length']);
+	update_status = Mdata['updated'];	
+	if (update_status == "True" || ForceUpdate){		
+		data = Mdata['data'];
+		clearCanvas();
+		posVector = [];	
+		var point = {x:-1,y:-1}
 		posVector.push(point);
-	}	
+		for(i=1;i<length_data;++i){
+			x = parseInt(data[String(i)]['x']);
+			y = parseInt(data[String(i)]['y']);
+			prevx = parseInt(data[String(i-1)]['x']);
+			prevy = parseInt(data[String(i-1)]['y']);		
+			if(x!=-1 && y!=-1){
+				if(prevx == -1 || prevy == -1){
+					ctx.beginPath();
+					ctx.moveTo(x,y);				
+				}
+				else{		
+					ctx.lineTo(x,y);
+					ctx.stroke();	
+				}	
+			}
+			else
+				ctx.beginPath();
+			var point = {x:x,y:y}
+			posVector.push(point);
+		}	
+	}
 }
 /*
 function send_canvas(){	
@@ -192,6 +195,7 @@ function send_canvas_data(){
                 data: JSON.stringify(formdata),
                 dataType: 'json',                
                 url: 'https://pictionary23.herokuapp.com/canvas_data',
+                //url: 'http://127.0.0.1:5000/canvas_data',
                 success: function (e) {
                     console.log(e);
                     //window.location = "http://192.168.57.223:5000/preview";                    
@@ -201,7 +205,7 @@ function send_canvas_data(){
             }
         })
  }
- function get_canvas(){ 	
+ function get_canvas(ForceUpdate){ 	
  	//var formdata = serialize({x:10,y:20});
  	//var formdata = {x:10,y:20};
  	console.log("GC ->Pos Vector : ",posVector);
@@ -210,9 +214,10 @@ function send_canvas_data(){
                 contentType: 'application/json',                
                 dataType: 'json',                
                 url: 'https://pictionary23.herokuapp.com/canvas_data',
+                //url: 'http://127.0.0.1:5000/canvas_data',
                 success: function (e) {
                     console.log(e);                      
-                    draw_canvas(e);                                                         
+                    draw_canvas(e,ForceUpdate);                                                         
                     //window.location = "http://192.168.57.223:5000/preview";                    
                 },
                 error: function(error) {
