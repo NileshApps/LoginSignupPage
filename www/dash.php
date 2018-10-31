@@ -25,8 +25,11 @@
 		<div class = "tools">
 			<button id = "clear" onclick = "clearButton()">Clear</button>
 			<button id = "draw" onclick = "drawButton()">Draw</button>
-			<button id = "back" onclick = "go_back()">Back</button>
+			<button id = "back" onclick = "go_back()">Back</button>			
+		</div>
+		<div class = "log-grid">
 			<div id="log" style = "color:white;"></div>
+			<div id="log2" style = "color:white;"></div>
 		</div>
 	</div>
 </body>

@@ -7,6 +7,7 @@ var ctx;
 var prevX = -1,prevY = -1;
 var posVector = [];
 function init(){		
+	document.getElementById("log2").innerHTML = mode;
 	cvs = document.getElementById("canvas");	
 	ctx = cvs.getContext("2d");	
 	cvsHeight = cvs.height = canvas.offsetHeight;
@@ -28,13 +29,15 @@ function init(){
 }
 function dragStart(event){
 	isDrawing = true;
-	if(isDrawing)
+	if(isDrawing && mode == "draw")
 		draw_pixel(event);			
 }
 function dragging(event){	
 	//if(isDrawing && insideCanvas){						
 		isDrawing = true;
-		draw_pixel(event);		
+		if(mode == "draw"){
+			draw_pixel(event);		
+		}
 		//console.log("X: ",x," Y: ",y);
 //	}
 }
@@ -70,8 +73,10 @@ function draw_pixel(event){
 function dragEnd(event){	
 	isDrawing = false;
 	prevX = prevY = -1;
-	var point = {x:-1,y:-1};
-	posVector.push(point);	
+	if(mode == "draw"){
+		var point = {x:-1,y:-1};
+		posVector.push(point);	
+	}
 }
 function inCanvas(){
 	insideCanvas = true;	
@@ -83,7 +88,8 @@ function clearButton(){
 	clearCanvas();	
 	send_canvas(make_pos_vector_data(posVector));
 	document.getElementById("log").innerHTML = 'clear';
-	posVector = [];
+	prevX =-1;prevY = -1;
+	posVector = [{x:-1,y:-1}];
 }
 function make_pos_vector_data(posVector){
 	packet = {};
@@ -103,6 +109,7 @@ function draw_canvas(Mdata){
 	length_data = parseInt(Mdata['length']);	
 	data = Mdata['data'];
 	clearCanvas();
+	posVector = [];	
 	var point = {x:-1,y:-1}
 	posVector.push(point);
 	for(i=1;i<length_data;++i){
@@ -174,6 +181,7 @@ function send_canvas_data(){
  function send_canvas(formdata){
  	//var formdata = serialize({x:10,y:20});
  	//var formdata = {x:10,y:20};
+ 	console.log("SC->Pos Vector : ",posVector);
            $.ajax({
                 type: 'POST',
                 contentType: 'application/json',
@@ -192,6 +200,7 @@ function send_canvas_data(){
  function get_canvas(){ 	
  	//var formdata = serialize({x:10,y:20});
  	//var formdata = {x:10,y:20};
+ 	console.log("GC ->Pos Vector : ",posVector);
            $.ajax({
                 type: 'GET',
                 contentType: 'application/json',                
@@ -208,11 +217,15 @@ function send_canvas_data(){
         })  	      
  }
  function go_back(){
+ 	posVector = [{x:-1,y:-1}];
+ 	prevX = -1;prevY = -1;
  	window.location="index.html";
  }
  if (mode == "draw"){
- 	let send_canvas_interval = setInterval(send_canvas_data,2000);
+ 	console.log("a");
+ 	let send_canvas_interval = setInterval(send_canvas_data,1000);
  	}
  else{
- 	let get_canvas_interval = setInterval(get_canvas,2000);
+ 	console.log("b");
+ 	let get_canvas_interval = setInterval(get_canvas,1000);
  }
