@@ -12,15 +12,15 @@
 		<div class = "board">
 			<canvas id = "canvas" class = "canvas" onmouseenter="inCanvas()" onmouseleave="outCanvas()" ontouchmove="dragging(event)" ontouchstart="dragStart(event)" ontouchend="dragEnd(event)" onmousemove="dragging(event)"onmousedown="dragStart(event)" onmouseup="dragEnd(event)"></canvas>	
 		</div>
-		<div class = "tools">
+		<!--<div class = "tools">
 			<button id = "clear" onclick = "clearButton()">Clear</button>
 			<button id = "draw" onclick = "drawButton()">Draw</button>
 			<button id = "back" onclick = "go_back()">Back</button>			
 		</div>
-		<div class = "log-grid">
-			<div id="log" style = "color:white;"></div>
-			<div id="log2" style = "color:white;"></div>
-		</div>
+	-->		
+	</div>
+	<div class = "below-bar">			
+		<button id = "back" style = "width:80%;" onclick = "go_back()">Back</button>
 	</div>
 </body>
 </html>	

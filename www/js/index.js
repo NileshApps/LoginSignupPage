@@ -10,7 +10,7 @@ var mode;
 function init(){	
 	mode = localStorage.mode;		
 	console.log("Mode: ",mode);
-	document.getElementById("log2").innerHTML = mode;
+	//document.getElementById("log2").innerHTML = mode;
 	cvs = document.getElementById("canvas");	
 	ctx = cvs.getContext("2d");	
 	cvsHeight = cvs.height = canvas.offsetHeight;
@@ -49,14 +49,14 @@ function draw_pixel(event){
 	if(event.type == "mousemove" || event.type == "mousedown" || event.type == "mouseup"){								
 			var x = event.pageX-cvs.offsetLeft;
 			var y = event.pageY-cvs.offsetTop;									
-			document.getElementById("log").innerHTML = 'mouse : '+x.toString()+','+y.toString();
+			//document.getElementById("log").innerHTML = 'mouse : '+x.toString()+','+y.toString();
 	}
 	else{								
 			event.preventDefault();						
 			var touch = event.touches[0];						
 			var x = touch.pageX-cvs.offsetLeft;			
 			var y = touch.pageY-cvs.offsetTop;												
-			document.getElementById("log").innerHTML = 'touch : '+x.toString()+','+y.toString();
+			//document.getElementById("log").innerHTML = 'touch : '+x.toString()+','+y.toString();
 		}
 	//cvs = document.getElementById("canvas");		
 	//ctx = cvs.getContext("2d");
@@ -91,7 +91,7 @@ function outCanvas(){
 function clearButton(){	
 	clearCanvas();	
 	send_canvas(make_pos_vector_data(posVector));
-	document.getElementById("log").innerHTML = 'clear';
+	//document.getElementById("log").innerHTML = 'clear';
 	prevX =-1;prevY = -1;
 	posVector = [{x:-1,y:-1}];
 }
@@ -103,7 +103,7 @@ function make_pos_vector_data(posVector){
 	return packet;
 }
 function drawButton(){		
-	document.getElementById("log").innerHTML = 'draw';
+	//document.getElementById("log").innerHTML = 'draw';
 	get_canvas(true);	 	
 }
 function clearCanvas(){
