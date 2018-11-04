@@ -21,6 +21,8 @@
 	</div>
 	<div class = "below-bar">			
 		<button id = "back" style = "width:80%;" onclick = "go_back()">Back</button>
+		<br/><br/>
+		<button id = "clear" style = "width:80%;" onclick = "clearButton()">Clear</button>
 	</div>
 </body>
 </html>	
