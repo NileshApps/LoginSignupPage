@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="app.pictionary.com" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Pictionary</name>
+    <name>Ghanta</name>
     <description>
-        A Draw and Guess Game
+        Take note of your hours in office
     </description>
     <author email="dragonair2311@gmail.com" href="app.pictionary.com">
         Cyatrosi
