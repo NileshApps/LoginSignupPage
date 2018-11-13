@@ -147,5 +147,5 @@ function ResetApp(){
 	document.getElementById('time-left').innerHTML = "<br/>"+get_time_from_msec(get_total_time());
 }
 function ShowDevInfo(){
-	alert("App Developed By: Cyatrosi\nDate: 14/11/2018\nDesc: Keep Track of your office work hours.\nJust Check in and Check out when you punch and \nLet the app do the math.");
+	alert("App Developed By: Cyatrosi\nDate: 14/11/2018\nDescription: Keep Track of your office work hours.\nJust Check in and Check out when you punch and \nLet the app do the math.");
 }
