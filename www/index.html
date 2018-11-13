@@ -1,23 +1,26 @@
 <html>
-<head>
-	<link rel = "stylesheet" type = "text/css" href = "https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
+<head>	
 	<link rel = "stylesheet" href = "css/index.css">
-	<!--<link href="https://fonts.googleapis.com/css?family=Poiret+One|Roboto" rel="stylesheet">-->
-	<script src = "https://storage.googleapis.com/code.getmdl.io/1.0.6/material.js"></script>
+	<!--<link href="https://fonts.googleapis.com/css?family=Poiret+One|Roboto" rel="stylesheet">-->	
 	<script src = "js/index.js"></script>
 </head>
-<body>
-	<div class = "mdl-grid" style = "padding:0px;width:100%;">
-		<div class = "mdl-cell--12-col banner">Pictionary</div>
-		<div class = "mdl-cell--12-col back">
-			<form action = "dash.php" style = "width:100%;height:100%;">
-				<div class = "mdl-cell--12-col button-d" style = "width:100%;">					  						
-					<button id = "draw" onclick = "setLocal('draw')" name = "draw" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Draw</button>
-				</div>
-				<div class = "mdl-cell--12-col button-d" style = "width:100%">					  									
-					<button id = "guess" onclick = "setLocal('guess')" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Guess</button>
-				</div>
-			</form>
+<body onload = "init()">
+	<div class = "container">
+		<div class = "Header"></div>
+		<div class = "data-container">
+			<div id = "days" class = "bar">
+				<div class = "day">Monday</div>
+				<div class = "day">Tuesday</div>
+				<div class = "day">Wednesday</div>
+				<div class = "day">Thursday</div>
+				<div class = "day">Friday</div>
+			</div>
+			<div id = "stat" class = "bar">				
+				<div class = "time-left">32</div>
+				<div class = "button"><button>In</button></div>
+				<div class = "button"><button>Out</button></div>							
+				<div class = "time-to-complete">40</div>
+			</div>
 		</div>
 	</div>
 </body>
