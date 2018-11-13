@@ -40,7 +40,13 @@ body{
 .time-left{
 	width:80%;
 	margin-left:10%;
-	height:20%;
+	height:10%;
+	background-color: cyan;
+}
+.time-done{
+	width:80%;
+	margin-left:10%;
+	height:10%;
 	background-color: cyan;
 }
 .button{
