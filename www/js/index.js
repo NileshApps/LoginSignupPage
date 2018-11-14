@@ -9,8 +9,10 @@ function init(){
 window.localStorage.clear();
 var NewD = new Date();
 var DayCode = NewD.getDay();
-if(DayCode>=1 && DayCode<=5)
-	document.getElementById(DayCode).style.fontSize = "30px";	
+if(DayCode>=1 && DayCode<=5){
+	document.getElementById(DayCode).style.fontSize = "25px";
+	document.getElementById(DayCode).style.color = "#64FFDA";	
+}
 var db = window.openDatabase("test", "1.0", "Test DB", 1000000);
 var InVal = window.localStorage.getItem(get_in_str());
 if (InVal != null){
