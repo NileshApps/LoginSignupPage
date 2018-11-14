@@ -1,10 +1,12 @@
 <html>
-<head>	
-	<link rel = "stylesheet" href = "css/index.css">
-	<!--<link href="https://fonts.googleapis.com/css?family=Poiret+One|Roboto" rel="stylesheet">-->	
+<head>		
+	<link rel = "stylesheet" href = "mdl/material.css">	
+	<link rel = "stylesheet" href = "css/index.css">	
+	<script src = "js/material.js"></script>
 	<script src = "js/index.js"></script>
 </head>
 <body onload = "init()">
+	<!--
 	<div class = "container">
 		<div class = "Header">
 			<div style = "width:60%;margin-left:20%;">The Ghanta App</div>
@@ -33,6 +35,37 @@
 			<div>
 			<button class = "ResetButton" onclick="ShowDevInfo();" style = "font-size:13px;"><b>About</b></button>
 			</div>
+		</div>
+	</div>-->
+	<div class = "mdl-grid" style="width:100%;padding:0px;height:100%;text-align: center;">		
+		<!-- Header -->
+		<div class = "mdl-grid mdl-cell--12-col header" style="padding-left:0px;padding-bottom:0px;padding-right:0px;">
+			<div class = "mdl-cell--12-col" style="width:20%;"></div>
+			<div class = "mdl-cell--12-col" style="width:60%;">OBACUS</div>
+			<div class = "mdl-cell--12-col" style="width:20%;"></div>
+		</div>		
+		<!-- Days -->
+		<div class = "mdl-grid mdl-cell--12-col" style = "padding:0px;height:15%;">
+			<div class = "days-bar mdl-grid mdl-cell--12-col" style="width:80%;margin-left:10%;">						
+				<div id = "1" class = "day mdl-cell--12-col" style="width:20%;">M</div>	
+				<div id = "2" class = "day mdl-cell--12-col" style="width:20%;">T</div>
+				<div id = "3" class = "day mdl-cell--12-col " style="width:20%;color:#64FFDA;font-size:25px;">W</div>
+				<div id = "4" class = "day mdl-cell--12-col" style="width:20%;">T</div>
+				<div id = "5" class = "day mdl-cell--12-col" style="width:20%;">F</div>			
+			</div>
+		</div>
+		<!-- Timer -->
+		<div class = "mdl-grid mdl-cell--12-col" style = "height:15%;">			
+			<div id = "time-left" class = "time-left"></div>
+		</div>
+		<!-- Info -->
+		<div class = "mdl-grid mdl-cell--12-col" style = "height:35%;margin-top:5%;background-color:">						
+			<div id = "in" class = "mdl-cell--6-col time-data" style = "text-align: center;width:50%;padding:0px;"><button onclick = "checkIn()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored buttonClassy" style = "background-color: transparent;border:2px solid #0091EA;">IN</button></div>
+			<div id = "out" class = "mdl-cell--6-col time-data" style = "text-align: center;width:50%;padding:0px;"><button onclick = "checkOut()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored buttonClassy" style = "background-color: transparent;border:2px solid #DD2C00;">OUT</button></div>
+			<div id="time-done" class = "mdl-cell--12-col time-done">Today's Time : 40:50</div>
+		</div>
+		<!-- Extra -->
+		<div class = "mdl-grid mdl-cell--12-col" style = "height:5%;">						
 		</div>
 	</div>
 </body>
