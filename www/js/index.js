@@ -7,7 +7,7 @@ Date.prototype.getWeek = function() {
     return Math.ceil((((this - dt) / 86400000) + dt.getDay()+1)/7);
 };
 function init(){
-window.localStorage.clear();
+//window.localStorage.clear();
 var NewD = new Date();
 var DayCode = NewD.getDay();
 change_active_day(DayCode);
@@ -88,10 +88,6 @@ function get_out_str(D){
 function get_total_time_str(D){	
 	return get_date_str(D) + "_tt";
 }
-function get_total_time_str(){
-	var D = new Date();
-	return get_date_str(D) + "_tt";
-}
 function get_week_str(myDate){
 	myDate.getFullYear()+":"+myDate.getWeek()+"_hours";
 }
@@ -158,7 +154,7 @@ if(val == null){
 	var ND = new Date(InVal);
 	var diff = get_datetime_object().getTime() - ND.getTime();
 	//console.log("Diff",diff,get_datetime_object(),InVal);
-	window.localStorage.setItem(get_total_time_str(),diff);			
+	window.localStorage.setItem(get_total_time_str(date),diff);			
 	document.getElementById('out').innerHTML = "<br/><u>Check Out </u><br/>"+get_time_str_without_sec(date);
 	document.getElementById('time-done').innerHTML = "<br/>Your Today's time is "+get_time_from_msec(diff);
 	var WeekTime = window.localStorage.getItem(get_week_str());
@@ -212,25 +208,25 @@ function ShowDevInfo(){
 function get_cdata_for_day(DayCode,IsActive){  
 	if(DayCode == 1){
 		if(IsActive == true)
-			return "<center><button onclick = 'show_cur_info("+DayCode+")' class='mdl-button mdl-js-button mdl-button--icon active-day'>M</button></center>";
+			return "<center><button onclick = 'show_cur_info("+DayCode+")' class='mdl-button mdl-js-button mdl-button--icon active-day'><b>M</b></button></center>";
 		else
 			return "<button onclick = 'show_cur_info("+DayCode+")' class = 'mdl-button mdl-js-button mdl-button--icon inactive-day'>M</button>";
 		}
 	else if(DayCode == 2 || DayCode == 4){
 		if(IsActive == true)
-			return "<center><button onclick = 'show_cur_info("+DayCode+")' class='mdl-button mdl-js-button mdl-button--icon active-day'>T</button></center>";
+			return "<center><button onclick = 'show_cur_info("+DayCode+")' class='mdl-button mdl-js-button mdl-button--icon active-day'><b>T</b></button></center>";
 		else
 			return "<button onclick = 'show_cur_info("+DayCode+")' class = 'mdl-button mdl-js-button mdl-button--icon inactive-day'>T</button>";
 	}	
 	else if(DayCode == 3){
 		if(IsActive == true)
-			return "<center><button onclick = 'show_cur_info("+DayCode+")' class='mdl-button mdl-js-button mdl-button--icon active-day'>W</button></center>";
+			return "<center><button onclick = 'show_cur_info("+DayCode+")' class='mdl-button mdl-js-button mdl-button--icon active-day'><b>W</b></button></center>";
 		else
 			return "<button onclick = 'show_cur_info("+DayCode+")' class = 'mdl-button mdl-js-button mdl-button--icon inactive-day'>W</button>";
 		}	
 	else if(DayCode == 5){
 		if(IsActive == true)
-			return "<center><button onclick = 'show_cur_info("+DayCode+")' class='mdl-button mdl-js-button mdl-button--icon active-day'>F</button></center>";
+			return "<center><button onclick = 'show_cur_info("+DayCode+")' class='mdl-button mdl-js-button mdl-button--icon active-day'><b>F</b></button></center>";
 		else
 			return "<button onclick = 'show_cur_info("+DayCode+")' class = 'mdl-button mdl-js-button mdl-button--icon inactive-day'>F</button>";
 		}
@@ -294,6 +290,7 @@ for(var CurDay=1;CurDay<=5;++CurDay){
 		document.getElementById(DayCode).innerHTML = get_cdata_for_day(CurDay,false);	
 	}
 }
+document.getElementById('time-done').innerHTML = "";
 }
 function show_cur_info(id){
 	change_active_day(id);
