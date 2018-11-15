@@ -6,12 +6,20 @@ Date.prototype.getWeek = function() {
     return Math.ceil((((this - dt) / 86400000) + dt.getDay()+1)/7);
 };
 function init(){
-//window.localStorage.clear();
+window.localStorage.clear();
 var NewD = new Date();
 var DayCode = NewD.getDay();
-if(DayCode>=1 && DayCode<=5){
-	document.getElementById(DayCode).style.fontSize = "25px";
-	document.getElementById(DayCode).style.color = "#64FFDA";	
+for(var CurDay=1;CurDay<=5;++CurDay){
+	console.log(CurDay,get_cdata_for_day(CurDay,false));
+	if(DayCode>=1 && DayCode<=5){
+		if(DayCode == CurDay)
+			document.getElementById(CurDay).innerHTML = get_cdata_for_day(CurDay,true);	
+		else
+			document.getElementById(CurDay).innerHTML = get_cdata_for_day(CurDay,false);	
+	}
+	else{
+		document.getElementById(DayCode).innerHTML = get_cdata_for_day(CurDay,false);	
+	}
 }
 var db = window.openDatabase("test", "1.0", "Test DB", 1000000);
 var InVal = window.localStorage.getItem(get_in_str());
@@ -151,4 +159,32 @@ function ResetApp(){
 }
 function ShowDevInfo(){
 	alert("App Developed By: Cyatrosi\nDate: 14/11/2018\nDescription: Keep Track of your office work hours.\nJust Check in and Check out when you punch and \nLet the app do the math.");
+}
+function get_cdata_for_day(DayCode,IsActive){
+	if(DayCode == 1){
+		if(IsActive == true)
+			return "<center><div class='round-day'>M</div></center>";
+		else
+			return "M";
+		}
+	else if(DayCode == 2 || DayCode == 4){
+		if(IsActive == true)
+			return "<center><div class='round-day'>T</div></center>";
+		else
+			return "T";
+	}	
+	else if(DayCode == 3){
+		if(IsActive == true)
+			return "<center><div class='round-day'>W</div></center>";
+		else
+			return "W";
+		}	
+	else if(DayCode == 5){
+		if(IsActive == true)
+			return "<center><div class='round-day'>F</div></center>";
+		else
+			return "F";
+		}
+	else
+		return "";	
 }

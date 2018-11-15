@@ -44,15 +44,16 @@ body{
 }
 .day{
 	font-size: 17px;
-	color:#bdbdbd;
+	color:white;
 }
 .days-bar{	
 	padding:0;
 	height:40%;
 	padding-top:5%;	
 	border-radius:10px;
-	color:#9E9E9E;	
+	color:white;	
 	margin-top:2%;	
+	box-shadow: 0 4px 20px rgba(0,0,0,.5);
 }
 .time-left{
 	/*width:80%;
@@ -115,10 +116,18 @@ body{
 .buttonClassy{
 	padding:0px;
 	width:70px;
-	height:70px;	
-	transition: all 0.5s fade;
-	box-shadow: 0 2px 4px rgba(0,0,0,.5);
+	height:70px;		
+	box-shadow: 0 2px 60px rgba(0,0,0,.5);
 }
 .buttonClassy:hover{
 	box-shadow: 0 6px 6px rgba(0,0,0,.5);	
+}
+.round-day{
+	margin-top:-10%;
+	width:35px;
+	padding-top:7px;
+	height:28px;
+	background-color:#009688;	
+	color:white;	
+	border-radius:50%;
 }
