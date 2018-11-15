@@ -7,7 +7,7 @@ Date.prototype.getWeek = function() {
     return Math.ceil((((this - dt) / 86400000) + dt.getDay()+1)/7);
 };
 function init(){
-window.localStorage.clear();
+//window.localStorage.clear();
 var NewD = new Date();
 var DayCode = NewD.getDay();
 change_active_day(DayCode);
