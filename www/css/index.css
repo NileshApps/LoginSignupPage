@@ -68,7 +68,7 @@ body{
 	color:white;
 	font-size:25px;
 	margin-left:35%;
-	box-shadow: 0 0px 50px rgba(0,0,0,.5);
+	box-shadow: 0 0px 60px rgba(0,0,0,.5);
 }
 .time-done{
 	font-size:19px;
@@ -117,17 +117,34 @@ body{
 	padding:0px;
 	width:70px;
 	height:70px;		
-	box-shadow: 0 2px 60px rgba(0,0,0,.5);
+	box-shadow: 0 4px 30px rgba(0,0,0,.5);
 }
 .buttonClassy:hover{
-	box-shadow: 0 6px 6px rgba(0,0,0,.5);	
+	box-shadow: 0 4px 10px rgba(0,0,0,.5);	
 }
-.round-day{
+.active-day{
 	margin-top:-10%;
-	width:35px;
-	padding-top:7px;
-	height:28px;
+	width:35px;	
+	height:35px;
 	background-color:#009688;	
+	color:white;
+	border-radius:50%;
+	border:none;
+	font-size:17px;
+}
+.active-day:hover{
+	background-color: #009688;
+}
+.inactive-day{
+	margin-top:-10%;
+	width:35px;	
+	height:35px;
+	background-color:transparent;	
 	color:white;	
 	border-radius:50%;
+	border:none;
+	font-size:17px;
+}
+.inactive-day:hover{
+	background-color: transparent;
 }
