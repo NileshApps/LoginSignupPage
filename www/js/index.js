@@ -282,9 +282,9 @@ activeDay = DayCode;
 for(var CurDay=1;CurDay<=5;++CurDay){	
 	if(DayCode>=1 && DayCode<=5){
 		if(DayCode == CurDay)
-			document.getElementById(CurDay).innerHTML = get_cdata_for_day(CurDay,true);	
-		else
-			document.getElementById(CurDay).innerHTML = get_cdata_for_day(CurDay,false);	
+			document.getElementById(CurDay).innerHTML = get_cdata_for_day(CurDay,true);				
+		else			
+			document.getElementById(CurDay).innerHTML = get_cdata_for_day(CurDay,false);			
 	}
 	else{
 		document.getElementById(DayCode).innerHTML = get_cdata_for_day(CurDay,false);	
