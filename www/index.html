@@ -14,8 +14,8 @@
 			<div id = "minute" class="clock-minute">50</div>
 			<button ontouchstart = "inc('hr');" ontouchend = "nullifyUp('hr');" onmousedown = "inc('hr');" onmouseup = "nullifyUp('hr');" onclick = "inc_hr_counter('hr');" id = "hr-up" class="up-button-hour arrow-up"></button>
 			<button ontouchstart = "inc('mn');" ontouchend = "nullifyUp('mn');" onmousedown = "inc('mn');" onmouseup = "nullifyUp('mn');" onclick = "inc_hr_counter('mn');" id = "min-up" class="up-button-minute arrow-up"></button>			
-			<button ontouchstart = "inc('mn');" ontouchend = "nullifyUp('mn');" onmousedown = "dec('hr');" onmouseup = "nullifyDown('hr');" onclick = "dec_hr_counter('hr');" id = "hr-down" class="down-button-hour arrow-down"></button>
-			<button ontouchstart = "inc('mn');" ontouchend = "nullifyUp('mn');" onmousedown = "dec('mn');" onmouseup = "nullifyDown('mn');" onclick = "dec_hr_counter('mn');" id = "min-down" class="down-button-minute arrow-down"></button>			
+			<button ontouchstart = "dec('hr');" ontouchend = "nullifyDown('hr');" onmousedown = "dec('hr');" onmouseup = "nullifyDown('hr');" onclick = "dec_hr_counter('hr');" id = "hr-down" class="down-button-hour arrow-down"></button>
+			<button ontouchstart = "dec('mn');" ontouchend = "nullifyDown('mn');" onmousedown = "dec('mn');" onmouseup = "nullifyDown('mn');" onclick = "dec_hr_counter('mn');" id = "min-down" class="down-button-minute arrow-down"></button>			
 			<button onclick = "exec();" id = "done" class="done-button">OK</button>						
 		</div>
 		<!-- Header -->
