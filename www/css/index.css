@@ -6,7 +6,7 @@ body{
 	color:#424242;
 }
 .header{
-	padding-top:4%;
+	padding-top:5%;
 	width:100%;	
 	height:6%;	
 	font-size:27px;
@@ -39,7 +39,9 @@ body{
 	border:5px solid #00BFA5;
 	color:white;
 	font-size:25px;
-	margin-left:35%;
+	position: absolute;
+	left:50%;
+	margin-left:-55px;
 	box-shadow: 0 0px 60px rgba(0,0,0,.5);
 }
 .time-done{
@@ -318,4 +320,10 @@ body{
 	z-index:1;		
 	color:white;	
 	font-size:17px;			
+}
+.setting-button{
+	margin-top:-4%;	
+	background-color: transparent;
+	border:none;
+	outline: none;
 }

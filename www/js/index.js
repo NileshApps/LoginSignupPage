@@ -394,3 +394,23 @@ function exec(){
 	if(lastLongPress == 'out_button')
 		Out(D,true);
 }
+function showSettingScreen(){
+	document.getElementById('main-screen').style.visibility = "hidden";
+	document.getElementById('main-screen').style.opacity = "0";
+	setTimeout(function(){document.getElementById('main-screen').style.display = "none";},450);	
+	setTimeout(function(){
+			document.getElementById('setting').style.display = "inline";
+			document.getElementById('setting').style.visibility = "visible";
+			document.getElementById('setting').style.opacity = "1";
+			},500);
+}
+function hideSettingScreen(){
+	document.getElementById('setting').style.visibility = "hidden";
+	document.getElementById('setting').style.opacity = "0";
+	setTimeout(function(){document.getElementById('setting').style.display = "none";},450);	
+	setTimeout(function(){
+			document.getElementById('main-screen').style.display = "inline";
+			document.getElementById('main-screen').style.visibility = "visible";
+			document.getElementById('main-screen').style.opacity = "1";
+			},500);
+}
