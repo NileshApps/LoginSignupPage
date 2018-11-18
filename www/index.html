@@ -7,16 +7,15 @@
 </head>
 <body onload = "init()">	
 	<div class = "mdl-grid" style="width:100%;padding:0px;height:100%;text-align: center;">		
-
 		<div id = "time-selector" style = "display:none;">
 			<div onclick = "hideClock()" style = "background-color:rgba(0,0,0,0.6);width:100%;height:100%;position:absolute;z-index:1;"></div>			
 			<div id = "hour" class="clock-hour">23</div>
 			<div id = "colon" class="colon">:</div>			
 			<div id = "minute" class="clock-minute">50</div>
-			<button onclick = "inc_hr_counter('hr');" id = "hr-up" class="up-button-hour arrow-up"></button>
-			<button onclick = "inc_hr_counter('mn');" id = "min-up" class="up-button-minute arrow-up"></button>			
-			<button onclick = "dec_hr_counter('hr');" id = "hr-down" class="down-button-hour arrow-down"></button>
-			<button onclick = "dec_hr_counter('mn');" id = "min-down" class="down-button-minute arrow-down"></button>			
+			<button ontouchstart = "inc('hr');" ontouchend = "nullifyUp('hr');" onmousedown = "inc('hr');" onmouseup = "nullifyUp('hr');" onclick = "inc_hr_counter('hr');" id = "hr-up" class="up-button-hour arrow-up"></button>
+			<button ontouchstart = "inc('mn');" ontouchend = "nullifyUp('mn');" onmousedown = "inc('mn');" onmouseup = "nullifyUp('mn');" onclick = "inc_hr_counter('mn');" id = "min-up" class="up-button-minute arrow-up"></button>			
+			<button ontouchstart = "inc('mn');" ontouchend = "nullifyUp('mn');" onmousedown = "dec('hr');" onmouseup = "nullifyDown('hr');" onclick = "dec_hr_counter('hr');" id = "hr-down" class="down-button-hour arrow-down"></button>
+			<button ontouchstart = "inc('mn');" ontouchend = "nullifyUp('mn');" onmousedown = "dec('mn');" onmouseup = "nullifyDown('mn');" onclick = "dec_hr_counter('mn');" id = "min-down" class="down-button-minute arrow-down"></button>			
 			<button onclick = "exec();" id = "done" class="done-button">OK</button>						
 		</div>
 		<!-- Header -->

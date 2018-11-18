@@ -1,4 +1,4 @@
-var mnupRepeater;
+var hrupRepeater,hrdownRepeater;
 var dblClkTimeout;
 var lastLongPress;
 function setLocal(val){
@@ -332,16 +332,36 @@ function pauseAnimation(El){
 	El.style.animationIterationCount = 0;
 }
 function inc(val){
-	if(val == 'hr')
-		hrupRepeater=setInterval(inc_hr_counter('hr'), 100);
-	if(val == 'mn')
-		mnupRepeater=setInterval(inc_hr_counter('mn'), 100);
+	if(val == 'hr'){
+		inc_hr_counter('hr');
+		hrupRepeater=setTimeout(function(){inc(val);}, 200);
+	}
+	if(val == 'mn'){
+		inc_hr_counter('mn');
+		hrupRepeater=setTimeout(function(){inc(val);}, 150);
+	}
 }
-function nullify(val){
+function dec(val){
+	if(val == 'hr'){
+		dec_hr_counter('hr');
+		hrdownRepeater=setTimeout(function(){dec(val);}, 200);
+	}
+	if(val == 'mn'){
+		dec_hr_counter('mn');
+		hrdownRepeater=setTimeout(function(){dec(val);}, 150);
+	}
+}
+function nullifyUp(val){
 	if(val == 'hr')
-		clearInterval(hrupRepeater);
+		clearTimeout(hrupRepeater);
 	if(val == 'mn')
-		clearInterval(mnupRepeater);
+		clearTimeout(hrupRepeater);
+}
+function nullifyDown(val){
+	if(val == 'hr')
+		clearTimeout(hrdownRepeater);
+	if(val == 'mn')
+		clearTimeout(hrdownRepeater);
 }
 function showClock(){
 	var D = new Date();
@@ -359,8 +379,7 @@ function init_timeout(val){
 	lastLongPress = val;	
 	dblClkTimeout = setTimeout(showClock,500);	
 }
-function clear_timeout(val){	
-	console.log(dblClkTimeout);	
+function clear_timeout(val){		
 	clearTimeout(dblClkTimeout);	
 }
 function exec(){
