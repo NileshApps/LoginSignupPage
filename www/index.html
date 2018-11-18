@@ -75,14 +75,14 @@
 		<!-- Info -->
 		<div class = "mdl-grid mdl-cell--12-col" style = "height:35%;margin-top:5%;background-color:">						
 			<div id = "in" class = "mdl-cell--4-col time-data" style = "text-align: center;width:50%;padding:0px;">
-				<button id = "in_button" onmousedown = "init_timeout(this.id)" onmouseup = "clear_timeout(this.id)" onclick = "checkIn()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored buttonClassy" style = "background-color:transparent;border:2px solid #0091EA;">IN</button>				
+				<button id = "in_button" ontouchstart = "init_timeout(this.id)" ontouchend = "clear_timeout(this.id)" onmousedown = "init_timeout(this.id)" onmouseup = "clear_timeout(this.id)" onclick = "checkIn()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored buttonClassy" style = "background-color:transparent;border:2px solid #0091EA;">IN</button>				
 			</div>
 			<!--
 			<div id = "in" class = "mdl-cell--4-col time-data" style = "text-align: center;width:20%;padding:0px;">
 				<button onclick = "showClock()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored buttonClassy smallButton" style = "background-color: transparent;border:2px solid #00C853;">+</button>				
 			</div>-->
 			<div id = "out" class = "mdl-cell--4-col time-data" style = "text-align: center;width:50%;padding:0px;">
-				<button id = "out_button"  onmousedown = "init_timeout(this.id)" onmouseup = "clear_timeout(this.id)" onclick = "checkOut()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored buttonClassy" style = "background-color: transparent;border:2px solid #DD2C00;">OUT</button>
+				<button id = "out_button" ontouchstart = "init_timeout(this.id)" ontouchend = "clear_timeout(this.id)" onmousedown = "init_timeout(this.id)" onmouseup = "clear_timeout(this.id)" onclick = "checkOut()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored buttonClassy" style = "background-color: transparent;border:2px solid #DD2C00;">OUT</button>
 			</div>
 			<div id="time-done" class = "mdl-cell--12-col time-done"></div>
 		</div>

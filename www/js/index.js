@@ -10,7 +10,7 @@ Date.prototype.getWeek = function() {
     return Math.ceil((((this - dt) / 86400000) + dt.getDay()+1)/7);
 };
 function init(){
-//window.localStorage.clear();
+window.localStorage.clear();
 var NewD = new Date();
 var DayCode = NewD.getDay();
 change_active_day(DayCode);
@@ -262,7 +262,7 @@ if (InVal != null){
 }
 else{
 	if(Diff>=0)
-		document.getElementById('in').innerHTML = "<button id = 'in_button' onmousedown = 'init_timeout(this.id)' onmouseup = 'clear_timeout(this.id)' onclick = 'checkIn()' class='mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored buttonClassy' style = 'background-color: transparent;border:2px solid #0091EA;'>IN</button>";
+		document.getElementById('in').innerHTML = "<button id = 'in_button' ontouchstart = 'init_timeout(this.id)' ontouchend = 'clear_timeout(this.id)' onmousedown = 'init_timeout(this.id)' onmouseup = 'clear_timeout(this.id)' onclick = 'checkIn()' class='mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored buttonClassy' style = 'background-color: transparent;border:2px solid #0091EA;'>IN</button>";
 	else
 		document.getElementById('in').innerHTML = "";
 }
@@ -273,7 +273,7 @@ if (OutVal != null){
 }
 else{
 	if(Diff>=0)
-		document.getElementById('out').innerHTML = "<button id = 'out_button' onmousedown = 'init_timeout(this.id)' onmouseup = 'clear_timeout(this.id)' onclick = 'checkOut()' class='mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored buttonClassy' style = 'background-color: transparent;border:2px solid #DD2C00;'>OUT</button>";
+		document.getElementById('out').innerHTML = "<button id = 'out_button' ontouchstart = 'init_timeout(this.id)' ontouchend = 'clear_timeout(this.id)' onmousedown = 'init_timeout(this.id)' onmouseup = 'clear_timeout(this.id)' onclick = 'checkOut()' class='mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored buttonClassy' style = 'background-color: transparent;border:2px solid #DD2C00;'>OUT</button>";
 	else
 		document.getElementById('out').innerHTML = "";
 }
