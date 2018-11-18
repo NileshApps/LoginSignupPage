@@ -2,7 +2,7 @@
 <head>		
 	<link rel = "stylesheet" href = "mdl/material.css">	
 	<link rel = "stylesheet" href = "css/index.css">	
-	<script src = "js/material.js"></script>
+	<script src = "mdl/material.js"></script>
 	<script src = "js/index.js"></script>
 </head>
 <body onload = "init()">
@@ -38,20 +38,34 @@
 		</div>
 	</div>-->
 	<div class = "mdl-grid" style="width:100%;padding:0px;height:100%;text-align: center;">		
+
+		<div id = "time-selector" style = "display:none;">
+			<div onclick = "hideClock()" style = "background-color:rgba(0,0,0,0.7);width:100%;height:100%;position:absolute;z-index:1;"></div>			
+			<div id = "hour" class="clock-hour">23</div>
+			<div id = "colon" class="colon">:</div>			
+			<div id = "minute" class="clock-minute">50</div>
+			<button onclick = "inc_hr_counter('hr');" id = "hr-up" class="up-button-hour arrow-up"></button>
+			<button onclick = "inc_hr_counter('mn');" id = "min-up" class="up-button-minute arrow-up"></button>			
+			<button onclick = "dec_hr_counter('hr');" id = "hr-down" class="down-button-hour arrow-down"></button>
+			<button onclick = "dec_hr_counter('mn');" id = "min-down" class="down-button-minute arrow-down"></button>			
+			<button onclick = "exec();" id = "done" class="done-button">OK</button>						
+		</div>
 		<!-- Header -->
 		<div class = "mdl-grid mdl-cell--12-col header" style="padding-left:0px;padding-bottom:0px;padding-right:0px;">
 			<div class = "mdl-cell--12-col" style="width:20%;"></div>
 			<div class = "mdl-cell--12-col" style="width:60%;">OBACUS</div>			
-			<div class = "mdl-cell--12-col" style="width:20%;"><img class = "mdl-js-ripple-effect" src = "img/setting.png" style = "margin-left:15%;margin-top:-3%;width:30px;height:30px"></div>
+			<div class = "mdl-cell--12-col" style="width:20%;"><img class = "mdl-js-ripple-effect" src = "img/setting.png" style = "margin-left:15%;margin-top:-3%;width:30px;height:30px"></div>	
 		</div>		
 		<!-- Days -->
-		<div class = "mdl-grid mdl-cell--12-col" style = "padding:0px;height:15%;">
-			<div class = "days-bar mdl-grid mdl-cell--12-col" style="width:80%;margin-left:10%;border:1px solid #00BFA5;">						
-				<div id = "1" class = "day mdl-cell--12-col" style="width:20%;"></div>	
-				<div id = "2" class = "day mdl-cell--12-col" style="width:20%;"></div>
-				<div id = "3" class = "day mdl-cell--12-col" style="width:20%;"></div>
-				<div id = "4" class = "day mdl-cell--12-col" style="width:20%;"></div>
-				<div id = "5" class = "day mdl-cell--12-col" style="width:20%;"></div>			
+		<div class = "mdl-grid mdl-cell--12-col" style = "padding:0px	;height:15%;">
+			<div class = "days-bar mdl-grid mdl-cell--12-col" style="width:80%;margin-left:10%;border:1px solid #00BFA5;padding-left:1%;">
+				<div id = "0" class = "day mdl-cell--12-col" style="width:14%;"></div>	
+				<div id = "1" class = "day mdl-cell--12-col" style="width:14%;"></div>	
+				<div id = "2" class = "day mdl-cell--12-col" style="width:14%;"></div>
+				<div id = "3" class = "day mdl-cell--12-col" style="width:14%;"></div>
+				<div id = "4" class = "day mdl-cell--12-col" style="width:14%;"></div>
+				<div id = "5" class = "day mdl-cell--12-col" style="width:14%;"></div>
+				<div id = "6" class = "day mdl-cell--12-col" style="width:14%;"></div>				
 			</div>
 		</div>
 		<!-- Timer -->
@@ -60,12 +74,20 @@
 		</div>
 		<!-- Info -->
 		<div class = "mdl-grid mdl-cell--12-col" style = "height:35%;margin-top:5%;background-color:">						
-			<div id = "in" class = "mdl-cell--6-col time-data" style = "text-align: center;width:50%;padding:0px;"><button onclick = "checkIn()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored buttonClassy" style = "background-color: transparent;border:2px solid #0091EA;">IN</button></div>
-			<div id = "out" class = "mdl-cell--6-col time-data" style = "text-align: center;width:50%;padding:0px;"><button onclick = "checkOut()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored buttonClassy" style = "background-color: transparent;border:2px solid #DD2C00;">OUT</button></div>
+			<div id = "in" class = "mdl-cell--4-col time-data" style = "text-align: center;width:50%;padding:0px;">
+				<button id = "in_button" onmousedown = "init_timeout(this.id)" onmouseup = "clear_timeout(this.id)" onclick = "checkIn()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored buttonClassy" style = "background-color:transparent;border:2px solid #0091EA;">IN</button>				
+			</div>
+			<!--
+			<div id = "in" class = "mdl-cell--4-col time-data" style = "text-align: center;width:20%;padding:0px;">
+				<button onclick = "showClock()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored buttonClassy smallButton" style = "background-color: transparent;border:2px solid #00C853;">+</button>				
+			</div>-->
+			<div id = "out" class = "mdl-cell--4-col time-data" style = "text-align: center;width:50%;padding:0px;">
+				<button id = "out_button"  onmousedown = "init_timeout(this.id)" onmouseup = "clear_timeout(this.id)" onclick = "checkOut()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored buttonClassy" style = "background-color: transparent;border:2px solid #DD2C00;">OUT</button>
+			</div>
 			<div id="time-done" class = "mdl-cell--12-col time-done"></div>
 		</div>
 		<!-- Extra -->
-		<div class = "mdl-grid mdl-cell--12-col" style = "height:5%;">						
+		<div class = "mdl-grid mdl-cell--12-col" style = "height:5%;">									
 		</div>
 	</div>
 </body>

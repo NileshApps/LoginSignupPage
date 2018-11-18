@@ -1,3 +1,6 @@
+var mnupRepeater;
+var dblClkTimeout;
+var lastLongPress;
 function setLocal(val){
 	localStorage.mode = val;
 }
@@ -113,16 +116,19 @@ var yyyy = today.getFullYear();
 return RetDate = new Date(yyyy,mm,dd,19,0,0);
 }
 function checkIn(){
-var date = new Date();
-var TDiff = get_diff_in_ms(activeDay);
+var date = new Date();	
+In(date,false);
+}
+function In(date,force){
+var TDiff = get_diff_in_ms(date,activeDay);
 var Diff = date.getTime() - TDiff;
 var CurDate = new Date(TDiff);
 console.log("checkIn :",Diff);
-if(Diff==0){
+if(Diff==0 || force){
 	var key = get_in_str(CurDate);
 	var val = window.localStorage.getItem(key);
 	if(val == null){		
-		window.localStorage.setItem(key,get_datetime_object().toString());
+		window.localStorage.setItem(key,date.toString());
 		document.getElementById('in').innerHTML = "<br/><u>Check In </u><br/>"+get_time_str_without_sec(date);	
 	}
 }
@@ -137,7 +143,10 @@ else if(Diff>0){
 }
 function checkOut(){
 var date = new Date();
-var TDiff = get_diff_in_ms(activeDay);
+Out(date,false);
+}
+function Out(date,force){
+var TDiff = get_diff_in_ms(date,activeDay);
 var Diff = date.getTime() - TDiff;
 var CurDate = new Date(TDiff);
 if(Diff == 0){
@@ -150,9 +159,9 @@ else{
 var key = get_out_str(date);
 var val = window.localStorage.getItem(key);
 if(val == null){	
-	window.localStorage.setItem(key,get_datetime_object().toString());
+	window.localStorage.setItem(key,date.toString());
 	var ND = new Date(InVal);
-	var diff = get_datetime_object().getTime() - ND.getTime();
+	var diff = date.getTime() - ND.getTime();
 	//console.log("Diff",diff,get_datetime_object(),InVal);
 	window.localStorage.setItem(get_total_time_str(date),diff);			
 	document.getElementById('out').innerHTML = "<br/><u>Check Out </u><br/>"+get_time_str_without_sec(date);
@@ -230,12 +239,18 @@ function get_cdata_for_day(DayCode,IsActive){
 		else
 			return "<button onclick = 'show_cur_info("+DayCode+")' class = 'mdl-button mdl-js-button mdl-button--icon inactive-day'>F</button>";
 		}
+	else if(DayCode == 6 || DayCode == 0){
+		if(IsActive == true)
+			return "<center><button onclick = 'show_cur_info("+DayCode+")' class='mdl-button mdl-js-button mdl-button--icon active-day'><b>S</b></button></center>";
+		else
+			return "<button onclick = 'show_cur_info("+DayCode+")' class = 'mdl-button mdl-js-button mdl-button--icon inactive-day'>S</button>";
+		}
 	else
 		return "";	
 }
 function fillup_info(id){
 var NewD = new Date();
-var TDiff = get_diff_in_ms(id);
+var TDiff = get_diff_in_ms(NewD,id);
 var Diff = NewD.getTime() - TDiff;
 var CurDate = new Date(TDiff);
 console.log("Fill:",id," ms = ",Diff," with date ",CurDate);
@@ -247,7 +262,7 @@ if (InVal != null){
 }
 else{
 	if(Diff>=0)
-		document.getElementById('in').innerHTML = "<button onclick = 'checkIn()' class='mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored buttonClassy' style = 'background-color: transparent;border:2px solid #0091EA;'>IN</button>";
+		document.getElementById('in').innerHTML = "<button id = 'in_button' onmousedown = 'init_timeout(this.id)' onmouseup = 'clear_timeout(this.id)' onclick = 'checkIn()' class='mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored buttonClassy' style = 'background-color: transparent;border:2px solid #0091EA;'>IN</button>";
 	else
 		document.getElementById('in').innerHTML = "";
 }
@@ -258,7 +273,7 @@ if (OutVal != null){
 }
 else{
 	if(Diff>=0)
-		document.getElementById('out').innerHTML = "<button onclick = 'checkOut()' class='mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored buttonClassy' style = 'background-color: transparent;border:2px solid #DD2C00;'>OUT</button>";
+		document.getElementById('out').innerHTML = "<button id = 'out_button' onmousedown = 'init_timeout(this.id)' onmouseup = 'clear_timeout(this.id)' onclick = 'checkOut()' class='mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored buttonClassy' style = 'background-color: transparent;border:2px solid #DD2C00;'>OUT</button>";
 	else
 		document.getElementById('out').innerHTML = "";
 }
@@ -279,8 +294,8 @@ else{
 }
 function change_active_day(DayCode){
 activeDay = DayCode;
-for(var CurDay=1;CurDay<=5;++CurDay){	
-	if(DayCode>=1 && DayCode<=5){
+for(var CurDay=0;CurDay<=6;++CurDay){	
+	if(DayCode>=0 && DayCode<=6){
 		if(DayCode == CurDay)
 			document.getElementById(CurDay).innerHTML = get_cdata_for_day(CurDay,true);				
 		else			
@@ -296,8 +311,67 @@ function show_cur_info(id){
 	change_active_day(id);
 	fillup_info(id);
 }
-function get_diff_in_ms(id){
-var NewD = new Date();
+function get_diff_in_ms(NewD,id){
 var DayCode = NewD.getDay();
 return NewD.getTime() - ((DayCode-id)*86400*1000);
+}
+function dec_hr_counter(Name){	
+	if(Name == "hr")
+		document.getElementById('hour').innerHTML = Math.max(0,parseInt(document.getElementById('hour').innerHTML) - 1);	
+	if(Name == "mn")
+		document.getElementById('minute').innerHTML = Math.max(0,parseInt(document.getElementById('minute').innerHTML) - 1);	
+}
+function inc_hr_counter(Name){	
+	console.log('incC');
+	if(Name == 'hr')
+		document.getElementById('hour').innerHTML = Math.min(23,parseInt(document.getElementById('hour').innerHTML) + 1);	
+	if(Name == 'mn')
+		document.getElementById('minute').innerHTML = Math.min(59,parseInt(document.getElementById('minute').innerHTML) + 1);	
+}
+function pauseAnimation(El){
+	El.style.animationIterationCount = 0;
+}
+function inc(val){
+	if(val == 'hr')
+		hrupRepeater=setInterval(inc_hr_counter('hr'), 100);
+	if(val == 'mn')
+		mnupRepeater=setInterval(inc_hr_counter('mn'), 100);
+}
+function nullify(val){
+	if(val == 'hr')
+		clearInterval(hrupRepeater);
+	if(val == 'mn')
+		clearInterval(mnupRepeater);
+}
+function showClock(){
+	var D = new Date();
+	document.getElementById('hour').innerHTML = D.getHours();
+	document.getElementById('minute').innerHTML = D.getMinutes();
+	document.getElementById('time-selector').style.display = "block";
+}
+function hideClock(){	
+	document.getElementById('hour').innerHTML = "";
+	document.getElementById('minute').innerHTML = "";
+	document.getElementById('time-selector').style.display = "none";
+}
+function init_timeout(val){	
+	console.log("init_timeout",val,lastLongPress);
+	lastLongPress = val;	
+	dblClkTimeout = setTimeout(showClock,500);	
+}
+function clear_timeout(val){	
+	console.log(dblClkTimeout);	
+	clearTimeout(dblClkTimeout);	
+}
+function exec(){
+	var D = new Date();
+	var hr = parseInt(document.getElementById('hour').innerHTML);	
+	var mn = parseInt(document.getElementById('minute').innerHTML);	
+	D.setHours(hr);
+	D.setMinutes(mn);
+	document.getElementById('time-selector').style.display = "none";
+	if(lastLongPress == 'in_button')
+		In(D,true);
+	if(lastLongPress == 'out_button')
+		Out(D,true);
 }

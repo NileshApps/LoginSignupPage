@@ -151,3 +151,220 @@ body{
 .inactive-day:hover{
 	background-color: transparent;
 }
+.colon{
+	padding-top:15px;
+	width:50px;
+	height:35px;
+	background-color:transparent;
+	position:absolute;
+	top:47%;
+	left:44.5%;
+	z-index:1;	
+	color:white;
+	font-size:31px;	
+}
+.clock-hour{
+	padding-top:15px;
+	width:50px;
+	height:35px;
+	background-color:#424242;
+	position:absolute;
+	top:47%;
+	left:34%;
+	z-index:1;
+	border-radius:50%;
+	box-shadow: 0 0px 60px rgba(0,0,0,.5);
+	color:white;
+	font-size:21px;
+	border:1px solid white;
+}
+.clock-minute{
+	padding-top:15px;
+	width:50px;
+	height:35px;
+	background-color:#424242;
+	position:absolute;
+	top:47%;
+	left:54%;
+	z-index:1;
+	border-radius:50%;
+	box-shadow: 0 0px 60px rgba(0,0,0,.5);
+	color:white;
+	font-size:21px;
+	border:1px solid white;
+}
+.number{
+	padding-top:4px;
+	width:30px;
+	height:26px;
+	border-radius: 50%;
+	background-color:#009688;
+	color:white;	
+}
+.up-button-minute{				
+	background-color:transparent;
+	position:absolute;
+	top:40%;
+	left:54%;
+	z-index:1;		
+	color:white;
+	font-size:51px;		
+	margin-left:10px;
+	outline: none;
+	-webkit-animation-name: up-and-fade; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: infinity; /* Safari 4.0 - 8.0 */
+    -webkit-animation-iteration-count:6; /* Safari 4.0 - 8.0 */
+    -webkit-animation-direction: alternate; /* Safari 4.0 - 8.0 */
+    animation-name: up-and-fade;
+    animation-duration: 0.5s;
+    animation-iteration-count:6;
+    animation-direction: alternate;
+}
+.up-button-hour{				
+	background-color:transparent;
+	position:absolute;
+	top:40%;
+	left:34%;
+	z-index:1;		
+	color:white;
+	font-size:51px;		
+	margin-left:10px;
+	outline: none;
+	-webkit-animation-name: up-and-fade; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: infinity; /* Safari 4.0 - 8.0 */
+    -webkit-animation-iteration-count:6; /* Safari 4.0 - 8.0 */
+    -webkit-animation-direction: alternate; /* Safari 4.0 - 8.0 */
+    animation-name: up-and-fade;
+    animation-duration: 0.5s;
+    animation-iteration-count:6;
+    animation-direction: alternate;
+}
+.down-button-minute{				
+	background-color:transparent;
+	position:absolute;
+	top:58%;
+	left:54%;
+	z-index:1;		
+	color:white;
+	font-size:51px;		
+	margin-left:10px;
+	outline: none;
+	-webkit-animation-name: down-and-fade; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: infinity; /* Safari 4.0 - 8.0 */
+    -webkit-animation-iteration-count:6; /* Safari 4.0 - 8.0 */
+    -webkit-animation-direction: alternate; /* Safari 4.0 - 8.0 */
+    animation-name: down-and-fade;
+    animation-duration: 0.5s;
+    animation-iteration-count:6;
+    animation-direction: alternate;
+}
+.down-button-hour{				
+	background-color:transparent;
+	position:absolute;
+	top:58%;
+	left:34%;
+	z-index:1;		
+	color:white;
+	font-size:51px;		
+	margin-left:10px;
+	outline: none;
+	-webkit-animation-name: down-and-fade; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: infinity; /* Safari 4.0 - 8.0 */
+    -webkit-animation-iteration-count:6; /* Safari 4.0 - 8.0 */
+    -webkit-animation-direction: alternate; /* Safari 4.0 - 8.0 */
+    animation-name: down-and-fade;
+    animation-duration: 0.5s;
+    animation-iteration-count:6;
+    animation-direction: alternate;
+}
+@-webkit-keyframes up-and-fade {
+    from {top:40%;}
+    to {top:39%;}
+}
+@keyframes up-and-fade {
+    from {top:40%;}    
+    to {top:39%;}
+}
+@-webkit-keyframes down-and-fade {
+    from {top:58%;}
+    to {top:59%;}
+}
+@keyframes down-and-fade {
+    from {top:58%;}
+    to {top:59%;}
+}
+.arrow-up{
+  width: 0; 
+  height: 0;
+  padding:0;   
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid white;
+}
+.arrow-down{
+  width: 0; 
+  height: 0;
+  padding:0;   
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid white;
+  border-bottom: 15px solid transparent;
+}
+.done-button{
+	background-color:#212121;
+	width:80px;
+	height:50px;
+	position:absolute;
+	top:64%;
+	left:40%;
+	z-index:1;		
+	color:white;
+	font-size:19px;			
+	outline: none;	
+	border:2px solid white;		
+	box-shadow: 0px 0px 400px white;
+	transition: all 0.3s ease;
+}
+.done-button:active{	
+	border:2px solid #00C853;	
+}
+.smallButton{
+	margin-top:13%;
+	padding:0px;
+	width:50px;
+	height:50px;
+}
+.inout-toggle{
+	background-color:transparent;
+	width:50px;
+	height:50px;
+	position:absolute;
+	top:30%;
+	left:46%;
+	z-index:1;			
+	font-size:19px;			
+	outline: none;	
+}
+.in-label{	
+	background-color:transparent;
+	width:50px;
+	height:50px;
+	position:absolute;
+	top:30%;
+	left:35%;
+	z-index:1;		
+	color:white;	
+	font-size:17px;			
+}
+.out-label{	
+	background-color:transparent;
+	width:50px;
+	height:50px;
+	position:absolute;
+	top:30%;
+	left:56%;
+	z-index:1;		
+	color:white;	
+	font-size:17px;			
+}
