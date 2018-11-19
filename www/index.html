@@ -6,18 +6,8 @@
 	<script src = "js/index.js"></script>
 </head>
 <body onload = "init()">	
-	<div id = "setting" class = "mdl-grid" style="width:100%;padding:0px;height:100%;text-align: center;transition: all 0.5s ease-in-out;visibility:hidden;opacity:0;display:none;">		
-		<!-- Header -->
-		<div class = "mdl-grid mdl-cell--12-col header" style="padding-left:0px;padding-bottom:0px;padding-right:0px;">
-			<button onclick = "hideSettingScreen();" class = "mdl-cell--12-col setting-button" style="width:16%;padding-right:4%;"><img src = "img/back.png" style = "margin-left:15%;margin-top:-3%;width:30px;height:30px"></button>	
-			<div class = "mdl-cell--12-col" style="width:60%;">SETTING</div>		
-			<div class = "mdl-cell--12-col" style="width:20%;"></div>					
-		</div>
-	</div>
 
-
-	<div id = "main-screen" class = "mdl-grid" style="width:100%;padding:0px;height:100%;text-align: center;transition: all 0.5s ease-in-out;">		
-		<div id = "time-selector" style = "display:none;">
+	<div id = "time-selector" style = "display:none;">
 			<div onclick = "hideClock()" style = "background-color:rgba(0,0,0,0.6);width:100%;height:100%;position:absolute;z-index:1;"></div>			
 			<div id = "hour" class="clock-hour">23</div>
 			<div id = "colon" class="colon">:</div>			
@@ -28,6 +18,27 @@
 			<button ontouchstart = "dec('mn');" ontouchend = "nullifyDown('mn');" onmousedown = "dec('mn');" onmouseup = "nullifyDown('mn');" onclick = "dec_hr_counter('mn');" id = "min-down" class="down-button-minute arrow-down"></button>			
 			<button onclick = "exec();" id = "done" class="done-button">OK</button>						
 		</div>
+
+	<div id = "setting" class = "mdl-grid" style="width:100%;padding:0px;height:0%;text-align:center;">		
+		<!-- Header -->
+		<div id = "setting-header" class = "mdl-grid mdl-cell--12-col header" style="padding-left:0px;padding-bottom:0px;padding-right:0px;opacity:0;">
+			<button onclick = "hideSettingScreen();" class = "mdl-cell--12-col setting-button" style="width:16%;padding-right:4%;"><img src = "img/cancel.png" style = "margin-left:15%;margin-top:-17%;width:20px;height:20px"></button>	
+			<div class = "mdl-cell--12-col" style="width:60%;">SETTING</div>		
+			<div class = "mdl-cell--12-col" style="width:20%;"></div>					
+		</div>
+		<div id = "options" class = "mdl-grid mdl-cell--12-col" style = "width:100%;padding:0px;opacity:0;display:none;">			
+			<div onclick = "showClock('week_time');" class = "mdl-grid mdl-cell--12-col option" style = "height:5%;">
+				<div class = "mdl-cell--12-col main-text">Change Week Time<br/><small class = "desc-text">Click here to change time target for this week</small></div>
+			</div>			
+			<div onclick = "ResetApp();" class = "mdl-grid mdl-cell--12-col option" style = "height:5%;">
+				<div class = "mdl-cell--10-col main-text" style = "width:90%;">Reset App<br/><small class = "desc-text">This will reset all app data.</small></div>	
+				<div class = "mdl-cell--2-col" style = "width:10%;"><img src="img/warning.png" style = "width:30px;height:30px;"></div>
+			</div>
+			<div class = "mdl-grid mdl-cell--12-col" style = "height:90%;"></div>
+		</div>
+	</div>
+
+	<div id = "main-screen" class = "mdl-grid" style="width:100%;padding:0px;height:100%;text-align: center;">				
 		<!-- Header -->
 		<div class = "mdl-grid mdl-cell--12-col header" style="padding-left:0px;padding-bottom:0px;padding-right:0px;">
 			<div class = "mdl-cell--12-col" style="width:20%;"></div>
@@ -53,7 +64,7 @@
 		<!-- Info -->
 		<div class = "mdl-grid mdl-cell--12-col" style = "height:35%;margin-top:5%;background-color:">						
 			<div id = "in" class = "mdl-cell--4-col time-data" style = "text-align: center;width:50%;padding:0px;">
-				<button id = "in_button" ontouchstart = "init_timeout(this.id)" ontouchend = "clear_timeout(this.id)" onmousedown = "init_timeout(this.id)" onmouseup = "clear_timeout(this.id)" onclick = "checkIn()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored buttonClassy" style = "background-color:transparent;border:2px solid #0091EA;">IN</button>				
+				<button id = "in_button" ontouchstart = "init_timeout(this.id)" ontouchend = "clear_timeout(this.id)" onmousedown = "init_timeout(this.id)" onmouseup = "clear_timeout(this.id)" onclick = "checkIn()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored buttonClassy" style = "background-color:transparent;border:2px solid #0091EA;">IN</button>	
 			</div>
 			<!--
 			<div id = "in" class = "mdl-cell--4-col time-data" style = "text-align: center;width:20%;padding:0px;">

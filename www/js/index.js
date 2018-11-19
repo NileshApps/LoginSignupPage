@@ -1,9 +1,6 @@
 var hrupRepeater,hrdownRepeater;
 var dblClkTimeout;
 var lastLongPress;
-function setLocal(val){
-	localStorage.mode = val;
-}
 var activeDay;
 Date.prototype.getWeek = function() {
     var dt = new Date(this.getFullYear(),0,1);
@@ -11,6 +8,8 @@ Date.prototype.getWeek = function() {
 };
 function init(){
 //window.localStorage.clear();
+if (get_total_time() == null)
+	set_total_time(40,0);
 var NewD = new Date();
 var DayCode = NewD.getDay();
 change_active_day(DayCode);
@@ -49,10 +48,13 @@ else{
 }
 function get_time_from_msec(msec){	
 var hh = Math.floor(msec / 1000 / 60 / 60);
+console.log("HH:",hh);
 msec -= hh * 1000 * 60 * 60;
 var mm = Math.floor(msec / 1000 / 60);
+console.log("MM:",mm);
 msec -= mm * 1000 * 60;
 var ss = Math.floor(msec / 1000);
+console.log("SS:",ss);
 msec -= ss * 1000;
 return hh+":"+mm+":"+ss;
 }
@@ -98,8 +100,26 @@ function get_week_str(){
 	var myDate = new Date();
 	myDate.getFullYear()+":"+myDate.getWeek()+"_hours";
 }
+function get_week_total_timestr(){
+	return "wtt";
+}
 function get_total_time(){
-	return 40*60*60*1000;
+	return window.localStorage.getItem(get_week_total_timestr());
+}
+function set_total_time(hr,mn){		
+	var msec = hr*60*60*1000 + mn*60*1000;
+	console.log("Set_total_time",hr,mn,msec,get_total_time());
+	var Diff = msec - get_total_time();
+	window.localStorage.setItem(get_week_total_timestr(),msec);	
+	var WeekTotal = window.localStorage.getItem(get_week_str());
+	if(WeekTotal != null){
+		console.log("WT:",WeekTotal,Diff);
+		window.localStorage.setItem(get_week_str(),parseInt(WeekTotal) + Diff);		
+		document.getElementById('time-left').innerHTML = get_time_from_msec(parseInt(WeekTotal) + Diff);
+	}
+	else{
+		document.getElementById('time-left').innerHTML = get_time_from_msec(get_total_time());	
+	}
 }
 function get_default_in_time(){
 var today = new Date();
@@ -193,23 +213,32 @@ if(val == null){
 	window.localStorage.setItem(get_total_time_str(CurDate),diff);			
 	document.getElementById('out').innerHTML = "<br/><u>Check Out </u><br/>"+get_time_str_without_sec(get_default_out_time());
 	document.getElementById('time-done').innerHTML = "<br/>Your Today's time is "+get_time_from_msec(diff);
-	var WeekTime = window.localStorage.getItem(get_week_str());
+	var WeekTime = window.localStorage.getItem(get_week_str(CurDate));
 	if(WeekTime == null)
 		var time = get_total_time();
 	else
 		var time = WeekTime;
-	window.localStorage.setItem(get_week_str(),time-diff);
+	window.localStorage.setItem(get_week_str(CurDate),time-diff);
 	document.getElementById('time-left').innerHTML = get_time_from_msec(time-diff);
 	}
 }
 }
 }
 function ResetApp(){
-	window.localStorage.clear();
-	document.getElementById('in').innerHTML = "<button class = 'buttonNew' onclick = 'checkIn()' style = 'background-color: #0288D1;'><b>Check In </b></button>";
-	document.getElementById('out').innerHTML = "<button class = 'buttonNew' onclick = 'checkOut()' style = 'background-color: #D32F2F;'><b>Check Out</b></button>";	
-	document.getElementById('time-done').innerHTML = "";
-	document.getElementById('time-left').innerHTML = get_time_from_msec(get_total_time());
+	if(window.confirm("This will clear all your data. Do it ?")){
+		window.localStorage.clear();
+		document.getElementById('in').innerHTML = "<button class = 'buttonNew' onclick = 'checkIn()' style = 'background-color: #0288D1;'><b>Check In </b></button>";
+		document.getElementById('out').innerHTML = "<button class = 'buttonNew' onclick = 'checkOut()' style = 'background-color: #D32F2F;'><b>Check Out</b></button>";	
+		document.getElementById('time-done').innerHTML = "";
+		document.getElementById('time-left').innerHTML = get_time_from_msec(get_total_time());
+		if (get_total_time() == null)
+			set_total_time(40,0);
+		var NewD = new Date();
+		var DayCode = NewD.getDay();
+		change_active_day(DayCode);
+		fillup_info(DayCode);
+	window.alert('Done');
+	}
 }
 function ShowDevInfo(){
 	alert("App Developed By: Cyatrosi\nDate: 14/11/2018\nDescription: Keep Track of your office work hours.\nJust Check in and Check out when you punch and \nLet the app do the math.");
@@ -315,16 +344,19 @@ function get_diff_in_ms(NewD,id){
 var DayCode = NewD.getDay();
 return NewD.getTime() - ((DayCode-id)*86400*1000);
 }
-function dec_hr_counter(Name){	
-	if(Name == "hr")
+function dec_hr_counter(Name){		
+	if(Name == "hr")		
 		document.getElementById('hour').innerHTML = Math.max(0,parseInt(document.getElementById('hour').innerHTML) - 1);	
-	if(Name == "mn")
+	if(Name == "mn")		
 		document.getElementById('minute').innerHTML = Math.max(0,parseInt(document.getElementById('minute').innerHTML) - 1);	
 }
 function inc_hr_counter(Name){	
 	console.log('incC');
 	if(Name == 'hr')
-		document.getElementById('hour').innerHTML = Math.min(23,parseInt(document.getElementById('hour').innerHTML) + 1);	
+		if(lastLongPress != "week_time")
+			document.getElementById('hour').innerHTML = Math.min(23,parseInt(document.getElementById('hour').innerHTML) + 1);	
+		else
+			document.getElementById('hour').innerHTML = Math.min(167,parseInt(document.getElementById('hour').innerHTML) + 1);
 	if(Name == 'mn')
 		document.getElementById('minute').innerHTML = Math.min(59,parseInt(document.getElementById('minute').innerHTML) + 1);	
 }
@@ -332,23 +364,39 @@ function pauseAnimation(El){
 	El.style.animationIterationCount = 0;
 }
 function inc(val){
+	if(val == 'hr'){		
+		hrupRepeater=setTimeout(function(){recur_inc(val);}, 500);
+	}
+	if(val == 'mn'){		
+		hrupRepeater=setTimeout(function(){recur_inc(val);}, 500);
+	}
+}
+function recur_inc(val){
 	if(val == 'hr'){
 		inc_hr_counter('hr');
-		hrupRepeater=setTimeout(function(){inc(val);}, 200);
+		hrupRepeater=setTimeout(function(){recur_inc(val);}, 200);
 	}
 	if(val == 'mn'){
 		inc_hr_counter('mn');
-		hrupRepeater=setTimeout(function(){inc(val);}, 150);
+		hrupRepeater=setTimeout(function(){recur_inc(val);}, 150);
 	}
 }
 function dec(val){
+	if(val == 'hr'){		
+		hrdownRepeater=setTimeout(function(){recur_dec(val);}, 500);
+	}
+	if(val == 'mn'){		
+		hrdownRepeater=setTimeout(function(){recur_dec(val);}, 500);
+	}
+}
+function recur_dec(val){
 	if(val == 'hr'){
 		dec_hr_counter('hr');
-		hrdownRepeater=setTimeout(function(){dec(val);}, 200);
+		hrdownRepeater=setTimeout(function(){recur_dec(val);}, 200);
 	}
 	if(val == 'mn'){
 		dec_hr_counter('mn');
-		hrdownRepeater=setTimeout(function(){dec(val);}, 150);
+		hrdownRepeater=setTimeout(function(){recur_dec(val);}, 150);
 	}
 }
 function nullifyUp(val){
@@ -363,11 +411,21 @@ function nullifyDown(val){
 	if(val == 'mn')
 		clearTimeout(hrdownRepeater);
 }
-function showClock(){
+function showClock(val){
+	lastLongPress = val;	
 	var D = new Date();
+	if(val == "week_time"){
+	var msec = get_total_time();
+	var hr = msec/(1000*60*60);
+	var min = (msec - hr*(1000*60*60))/(1000*60);
+	document.getElementById('hour').innerHTML = hr;
+	document.getElementById('minute').innerHTML = min;
+	}
+	else{
 	document.getElementById('hour').innerHTML = D.getHours();
-	document.getElementById('minute').innerHTML = D.getMinutes();
-	document.getElementById('time-selector').style.display = "block";
+	document.getElementById('minute').innerHTML = D.getMinutes();	
+	}
+	document.getElementById('time-selector').style.display = "block";	
 }
 function hideClock(){	
 	document.getElementById('hour').innerHTML = "";
@@ -377,7 +435,7 @@ function hideClock(){
 function init_timeout(val){	
 	console.log("init_timeout",val,lastLongPress);
 	lastLongPress = val;	
-	dblClkTimeout = setTimeout(showClock,500);	
+	dblClkTimeout = setTimeout(function(){showClock(val);},500);	
 }
 function clear_timeout(val){		
 	clearTimeout(dblClkTimeout);	
@@ -393,24 +451,20 @@ function exec(){
 		In(D,true);
 	if(lastLongPress == 'out_button')
 		Out(D,true);
+	if(lastLongPress == 'week_time')
+		set_total_time(hr,mn);	
 }
 function showSettingScreen(){
-	document.getElementById('main-screen').style.visibility = "hidden";
-	document.getElementById('main-screen').style.opacity = "0";
-	setTimeout(function(){document.getElementById('main-screen').style.display = "none";},450);	
-	setTimeout(function(){
-			document.getElementById('setting').style.display = "inline";
-			document.getElementById('setting').style.visibility = "visible";
-			document.getElementById('setting').style.opacity = "1";
-			},500);
+	document.getElementById('setting').style.height = "100%"	;
+	document.getElementById('main-screen').style.height = "0%";	
+	document.getElementById('options').style.opacity = "1";	
+	document.getElementById('setting-header').style.opacity = "1";	
+	setTimeout(function(){document.getElementById('options').style.display = "inherit";},100);		
 }
 function hideSettingScreen(){
-	document.getElementById('setting').style.visibility = "hidden";
-	document.getElementById('setting').style.opacity = "0";
-	setTimeout(function(){document.getElementById('setting').style.display = "none";},450);	
-	setTimeout(function(){
-			document.getElementById('main-screen').style.display = "inline";
-			document.getElementById('main-screen').style.visibility = "visible";
-			document.getElementById('main-screen').style.opacity = "1";
-			},500);
+	document.getElementById('main-screen').style.height = "100%";
+	document.getElementById('setting').style.height = "0%";	
+	document.getElementById('options').style.opacity = "0";
+	document.getElementById('setting-header').style.opacity = "0";
+	setTimeout(function(){document.getElementById('options').style.display = "none";},400);
 }
