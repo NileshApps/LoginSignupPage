@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="app.ghanta.com" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Ghanta</name>
+<widget id="app.nilesh.com" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>learncodeonline</name>
     <description>
-        Take note of your hours in office
+        learncodeonline.com login and signup
     </description>
-    <author email="dragonair2311@gmail.com" href="app.ghanta.com">
+    <author email="dragonair2311@gmail.com" href="app.nilesh.com">
         Cyatrosi
     </author>
     <content src="index.html" />
